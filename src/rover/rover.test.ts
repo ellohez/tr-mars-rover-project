@@ -32,7 +32,7 @@ describe("createRover function", () => {
 });
 
 describe("spinRover function", () => {
-  test("should update the orientation of the rover to 90 degrees in the direction given", () => {
+  test("should update the orientation of the rover to North if we spin RIGHT from West", () => {
     // Arrange
     const rover: Rover = {
       currentPosition: { x: 10, y: 10 },
@@ -42,6 +42,39 @@ describe("spinRover function", () => {
     const newRover = spinRover(rover, "R");
     // Assert
     expect(newRover.orientation).toBe("N");
+  });
+  test("should update the orientation of the rover to West if we spin LEFT from North", () => {
+    // Arrange
+    const rover: Rover = {
+      currentPosition: { x: 10, y: 10 },
+      orientation: "N",
+    };
+    // Act
+    const newRover = spinRover(rover, "L");
+    // Assert
+    expect(newRover.orientation).toBe("W");
+  });
+  test("should update the orientation of the rover to East if we spin LEFT from South", () => {
+    // Arrange
+    const rover: Rover = {
+      currentPosition: { x: 10, y: 10 },
+      orientation: "S",
+    };
+    // Act
+    const newRover = spinRover(rover, "L");
+    // Assert
+    expect(newRover.orientation).toBe("E");
+  });
+  test("should update the orientation of the rover to South if we spin RIGHT from East", () => {
+    // Arrange
+    const rover: Rover = {
+      currentPosition: { x: 10, y: 10 },
+      orientation: "E",
+    };
+    // Act
+    const newRover = spinRover(rover, "R");
+    // Assert
+    expect(newRover.orientation).toBe("S");
   });
 });
 

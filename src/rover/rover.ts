@@ -43,7 +43,7 @@ export const spinRover = (rover: Rover, direction: Direction): Rover => {
   // and the one after W becomes N
   if (direction === "R") {
     const newIndex = index + 1;
-    if (newIndex % (COMPASS_POINT_STRINGS.length - 1) > 0) {
+    if (newIndex > COMPASS_POINT_STRINGS.length - 1) {
       newOrientation = COMPASS_POINT_STRINGS[0];
     } else {
       newOrientation = COMPASS_POINT_STRINGS[newIndex];
