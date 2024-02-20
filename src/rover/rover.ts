@@ -27,3 +27,7 @@ export const createRover = (
   }
   return { currentPosition: position, directionOfTravel: direction };
 };
+
+// export const spinRover = (rover: Rover, direction: Direction): Rover => {
+//   return;
+// };
