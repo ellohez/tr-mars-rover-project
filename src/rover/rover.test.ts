@@ -1,5 +1,5 @@
 import { createPlateau } from "../plateau/plateau";
-import { Orientation, CompassPoint, Rover, createRover } from "../rover/rover";
+import { Rover, createRover, spinRover, Orientation } from "../rover/rover";
 
 describe("createRover function", () => {
   test("should create a rover at the given position", () => {
@@ -9,13 +9,13 @@ describe("createRover function", () => {
     const x = 5;
     const y = 5;
     const plateau = createPlateau(width, length);
-    const direction = "N";
+    const direction: Orientation = "N";
     // Act
     const resultRover = createRover(plateau, x, y, direction);
     // Assert
     expect(resultRover).toEqual({
       currentPosition: { x: x, y: y },
-      directionOfTravel: direction,
+      orientation: direction,
     });
   });
 
@@ -31,5 +31,18 @@ describe("createRover function", () => {
   });
 });
 
+describe("spinRover function", () => {
+  test("should update the orientation of the rover to 90 degrees in the direction given", () => {
+    // Arrange
+    const rover: Rover = {
+      currentPosition: { x: 10, y: 10 },
+      orientation: "W",
+    };
+    // Act
+    const newRover = spinRover(rover, "R");
+    // Assert
+    expect(newRover.orientation).toBe("N");
+  });
+});
 
 
