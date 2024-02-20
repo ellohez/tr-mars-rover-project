@@ -1,18 +1,39 @@
-# TypeScript project with Tests
+# Mars Rover Control Center
+
+## Introduction
+
+## Overall Project Design
+
+### Assumptions
+### Approaches
+
+## Ideas for further development
 
 This repository can be used as a template for creating a TypeScript project using Jest for testing.
 
 ## Instructions
+### Prerequisites
+* Node version 19.18.2
+* npm version 9.8.1
+### Clone the repository
 
-- Click the "Use this template" button
+-   use git to clone this repo to your local environment
+#### Install dependencies
+```
+npm install
 
-- Click "Create new repository"
+```
 
-- Give your repository a name and click "Create repository from template"
+Run tests
 
-- Clone down your new repository to your computer
+```
+npm test
 
-- Navigate to the directory on your command line
+```
 
-- Run `npm install` followed by `npm test` to run the tests
+Run tests with coverage repot
 
+```
+npm run coverage
+
+```
