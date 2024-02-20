@@ -25,5 +25,12 @@ export const positionOnPlateau = (
   x: number,
   y: number
 ): Location => {
-  return { x: 0, y: 0 };
+
+    if (x < 0 || y < 0 || x > plateau.size.width || y > plateau.size.length) {
+      throw new RangeError(
+        `X and Y must be within 0 and the plateau dimensions - ${plateau.size.width} x ${plateau.size.length}`
+      );
+    }
+
+    return { x: x, y: y };
 };

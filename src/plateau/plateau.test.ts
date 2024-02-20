@@ -8,7 +8,7 @@ describe("createPlateau", () => {
     // Act
     const result: Plateau = createPlateau(width, length);
     // Assert
-    expect(result).toEqual({ size: { x: width, y: length } });
+    expect(result).toEqual({ size: { width: width, length: length } });
   });
 
   test("should throw an error if x is 0", () => {
