@@ -21,8 +21,6 @@ export const createRover = (
   y: number,
   direction: Orientation
 ): Rover => {
-  // TODO: Error checking
-  // call positionOnPlateau to ensure that the location is within plateau range
   let position = null;
   try {
     position = positionOnPlateau(plateau, x, y);
@@ -43,18 +41,16 @@ export const spinRover = (rover: Rover, direction: Direction): Rover => {
   // and the one after W becomes N
   if (direction === "R") {
     const newIndex = index + 1;
-    if (newIndex > COMPASS_POINT_STRINGS.length - 1) {
-      newOrientation = COMPASS_POINT_STRINGS[0];
-    } else {
-      newOrientation = COMPASS_POINT_STRINGS[newIndex];
-    }
+
+    newIndex > COMPASS_POINT_STRINGS.length - 1
+      ? (newOrientation = COMPASS_POINT_STRINGS[0])
+      : (newOrientation = COMPASS_POINT_STRINGS[newIndex]);
   } else {
     const newIndex = index - 1;
-    if (newIndex < 0) {
-      newOrientation = COMPASS_POINT_STRINGS[COMPASS_POINT_STRINGS.length - 1];
-    } else {
-      newOrientation = COMPASS_POINT_STRINGS[newIndex];
-    }
+    newIndex < 0
+      ? (newOrientation =
+          COMPASS_POINT_STRINGS[COMPASS_POINT_STRINGS.length - 1])
+      : (newOrientation = COMPASS_POINT_STRINGS[newIndex]);
   }
   return {
     ...rover,
