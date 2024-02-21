@@ -3,9 +3,11 @@ import {
   processCommand,
   CommandType,
   parseInstructions,
+  NO_SETUP_ERROR,
+  INVALID_ROVER_COMMAND,
 } from "./controlCentre";
 import { Rover } from "../rover/rover";
-import { createPlateau } from "../plateau/plateau";
+import { OUT_OF_BOUNDS, createPlateau } from "../plateau/plateau";
 
 describe("isCommand type guard", () => {
   test('should return false if command is not either "L, "R" or "M"', () => {
@@ -76,6 +78,19 @@ describe("processCommand", () => {
     // Assert
     expect(result).toStrictEqual(roverOutput);
   });
+  test("should throw an error if the next position would be out of the plateau bounds", () => {
+    // Arrange
+    const input: CommandType = "M";
+    const plateau = createPlateau(5, 5);
+    const roverInput: Rover = {
+      currentPosition: { x: 5, y: 5 },
+      orientation: "E",
+    };
+    // Act and Assert
+    expect(() => processCommand(input, plateau, roverInput)).toThrow(
+      RangeError(OUT_OF_BOUNDS)
+    );
+  });
 });
 
 describe("parseInstructions", () => {
@@ -91,21 +106,50 @@ describe("parseInstructions", () => {
   });
   test("should output a position of the SW corner of the plateau as the instructions direct", () => {
     // Arrange
+    const instructions = ["10 10", "7 3 S", "LMMMRMMM"];
+    const expectedOutput = ["10 0 S"];
     // Act
+    const actualOutput = parseInstructions(instructions);
     // Assert
+    // Ensure that the result has the same types and structure as we expect (strict)
+    expect(actualOutput).toStrictEqual(expectedOutput);
   });
 
   test("should output a position of the centre of the plateau as the instructions direct", () => {
     // Arrange
+    const instructions = ["6 10", "4 9 N", "LLMMMMRM"];
+    const expectedOutput = ["3 5 W"];
     // Act
+    const actualOutput = parseInstructions(instructions);
     // Assert
+    // Ensure that the result has the same types and structure as we expect (strict)
+    expect(actualOutput).toStrictEqual(expectedOutput);
   });
 
-  test("should throw a TypeError if a command is not in the list of valid commands", () => {
-    // E.g. "LRMZMM" -> all subsequent commands should be ignored
+  test("should throw a type error if a command is not in the list of valid commands", () => {
     // Arrange
-    // Act
-    // Assert
+    // E.g. "LRMZMM" -> all subsequent commands should be ignored
+    const instructions = ["5 5", "0 0 N", "LRZMM"];
+    // Act & Assert
+    expect(() => parseInstructions(instructions)).toThrow(
+      TypeError(INVALID_ROVER_COMMAND)
+    );
+  });
+  test("should throw an Error if instructions do not set up a plateau first", () => {
+    // Arrange
+    const instructions = ["0 0 N", "LRMM"];
+    // Act & Assert
+    expect(() => parseInstructions(instructions)).toThrow(
+      Error(NO_SETUP_ERROR)
+    );
+  });
+  test("should throw an Error if instructions do not set up a rover first", () => {
+    // Arrange
+    const instructions = ["5 5", "LRMM"];
+    // Act & Assert
+    expect(() => parseInstructions(instructions)).toThrow(
+      Error(NO_SETUP_ERROR)
+    );
   });
   test("should output a rover position of '1 3 N', '5 1 E' as the instructions direct", () => {
     // Arrange

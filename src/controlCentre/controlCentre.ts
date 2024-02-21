@@ -10,6 +10,10 @@ import { Plateau, createPlateau } from "../plateau/plateau";
 export type CommandType = Direction | "M";
 type CommandValues = CommandType[];
 
+export const NO_SETUP_ERROR =
+  "A plateau and rover must be set up before issuing commands";
+export const INVALID_ROVER_COMMAND = "Invalid rover command";
+
 const CommandsArray: CommandValues = ["L", "R", "M"];
 let rover: Rover;
 let plateau: Plateau;
@@ -25,7 +29,7 @@ export const processCommand = (
   command: CommandType,
   plateau: Plateau,
   rover: Rover
-): Rover | null => {
+): Rover => {
   switch (command) {
     case "M":
       try {
@@ -35,18 +39,14 @@ export const processCommand = (
       }
     case "L":
     case "R":
-      try {
-        return spinRover(rover, command);
-      } catch (error) {
-        throw error;
-      }
-    default:
-      return null;
+      return spinRover(rover, command);
   }
 };
 
 export const parseInstructions = (input: string[]): string[] => {
   const outputArray: Array<string> = [];
+  let plateauExists = false;
+  let roverExists = false;
 
   for (const line of input) {
     // line is not a string of commands
@@ -57,14 +57,16 @@ export const parseInstructions = (input: string[]): string[] => {
         let y = parseInt(inputArray[1]);
         if (isOrientation(inputArray[2])) {
           rover = createRover(plateau, x, y, inputArray[2]);
+          roverExists = true;
         }
       } else if (inputArray.length === 2) {
         const width = parseInt(inputArray[0]);
         const height = parseInt(inputArray[1]);
         plateau = createPlateau(width, height);
+        plateauExists = true;
       }
     } else {
-      if (plateau && rover) {
+      if (plateauExists && roverExists) {
         let commandArray = line.split("");
         for (let command of commandArray) {
           if (isCommand(command)) {
@@ -72,15 +74,15 @@ export const parseInstructions = (input: string[]): string[] => {
             if (result) {
               rover = result;
             }
+          } else {
+            throw TypeError(INVALID_ROVER_COMMAND);
           }
         }
         outputArray.push(
           `${rover.currentPosition.x} ${rover.currentPosition.y} ${rover.orientation}`
         );
-      } else {
-        throw Error(
-          "A plateau and rover must be set up before issuing commands"
-        );
+      } else if (!plateauExists || !roverExists) {
+        throw Error(NO_SETUP_ERROR);
       }
     }
   }
