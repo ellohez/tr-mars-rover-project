@@ -46,4 +46,8 @@ This program implements the rules for a Mars Rover.
 Install dependencies: `npm install`
 
 Run tests: `npm test` this automatically runs all tests and creates the coverage report
+<<<<<<< HEAD
 To view the coverage report - open `coverage\lcov-report\index.html` in a browser
+=======
+To view the coverage report - open `coverage\lcov-report\index.html` in a browser
+>>>>>>> 0a8c6d1411e5d8030c9c21e06f6e3893579f2367
