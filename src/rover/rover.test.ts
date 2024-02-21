@@ -84,7 +84,10 @@ describe("spinRover function", () => {
   });
 });
 describe("moveRover", () => {
-  test("should increase Y position on grid when rover moves North", () => {
+  test("should increase Y position on grid when rover moves North", () => {});
+  test("should decrease Y position on grid when rover moves South", () => {});
+
+  test("should increase X position on grid when rover moves East", () => {
     // Arrange
     const x = 5;
     const y = 5;
@@ -101,8 +104,6 @@ describe("moveRover", () => {
       orientation: "E",
     });
   });
-  test("should decrease Y position on grid when rover moves South", () => {});
-  test("should increase X position on grid when rover moves East", () => {});
   test("should decrease X position on grid when rover moves West", () => {});
   // TODO: Should throw an error if we try to move the rover outside of the plateau
 });
