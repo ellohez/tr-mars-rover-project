@@ -34,3 +34,9 @@ describe("isCommand type guard", () => {
     expect(isCommandResult).toEqual(true);
   });
 });
+
+describe("processCommand", () => {
+  test("should throw a TypeError if the command is not in the list of valid commands", () => {});
+
+  test("should ", () => {});
+});
