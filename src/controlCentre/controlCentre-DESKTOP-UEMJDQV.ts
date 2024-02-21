@@ -4,11 +4,18 @@ type CommandValues = CommandType[];
 
 const CommandsArray: CommandValues = ["L", "R", "M"];
 
+// Create variables for plateau and rover
+
 export const isCommand = (
   input: string | CommandType
 ): input is CommandType => {
   let testArray = [...CommandsArray.toString()];
   return testArray.includes(input);
+};
+
+export const processCommand = (command: CommandType) => {
+  // case L / R -> spinRover
+  // case M -> moveRover
 };
 
 export const parseInput = (input: string) => {
@@ -23,9 +30,4 @@ export const parseInput = (input: string) => {
 export const processOutput = (): string => {
   // get rover's current position and return as a string.
   return "";
-};
-
-export const processCommand = (command: string) => {
-  // case L / R -> spinRover
-  // case M -> moveRover
 };
