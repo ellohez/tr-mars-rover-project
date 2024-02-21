@@ -84,8 +84,41 @@ describe("spinRover function", () => {
   });
 });
 describe("moveRover", () => {
-  test("should increase Y position on grid when rover moves North", () => {});
-  test("should decrease Y position on grid when rover moves South", () => {});
+  test("should increase Y position on grid when rover moves North", () => {
+    // Arrange
+    const x = 5;
+    const y = 5;
+    const rover: Rover = {
+      currentPosition: { x: x, y: y },
+      orientation: "N",
+    };
+    const plateau = createPlateau(10, 10);
+    // Act
+    const newRover = moveRover(plateau, rover);
+    // Assert
+    expect(newRover).toEqual({
+      currentPosition: { x: x, y: y + 1 },
+      orientation: "N",
+    });
+  });
+
+  test("should decrease Y position on grid when rover moves South", () => {
+    // Arrange
+    const x = 5;
+    const y = 5;
+    const rover: Rover = {
+      currentPosition: { x: x, y: y },
+      orientation: "S",
+    };
+    const plateau = createPlateau(10, 10);
+    // Act
+    const newRover = moveRover(plateau, rover);
+    // Assert
+    expect(newRover).toEqual({
+      currentPosition: { x: x, y: y - 1 },
+      orientation: "S",
+    });
+  });
 
   test("should increase X position on grid when rover moves East", () => {
     // Arrange
@@ -104,8 +137,23 @@ describe("moveRover", () => {
       orientation: "E",
     });
   });
-  test("should decrease X position on grid when rover moves West", () => {});
+
+  test("should decrease X position on grid when rover moves West", () => {
+    // Arrange
+    const x = 5;
+    const y = 5;
+    const rover: Rover = {
+      currentPosition: { x: x, y: y },
+      orientation: "W",
+    };
+    const plateau = createPlateau(10, 10);
+    // Act
+    const newRover = moveRover(plateau, rover);
+    // Assert
+    expect(newRover).toEqual({
+      currentPosition: { x: x - 1, y: y },
+      orientation: "W",
+    });
+  });
   // TODO: Should throw an error if we try to move the rover outside of the plateau
 });
-
-
