@@ -57,3 +57,30 @@ export const spinRover = (rover: Rover, direction: Direction): Rover => {
     orientation: newOrientation,
   };
 };
+
+export const moveRover = (plateau: Plateau, rover: Rover): Rover => {
+  let newPosition = { x: rover.currentPosition.x, y: rover.currentPosition.y };
+
+  switch (rover.orientation) {
+    case "N":
+      newPosition.y += 1;
+      break;
+    case "S":
+      newPosition.y -= 1;
+      break;
+    case "E":
+      newPosition.x += 1;
+      break;
+    case "W":
+      newPosition.x -= 1;
+      break;
+  }
+
+  console.log("newPosition :>> ", newPosition);
+  try {
+    newPosition = positionOnPlateau(plateau, newPosition.x, newPosition.y);
+  } catch (error) {
+    throw error;
+  }
+  return { ...rover, currentPosition: newPosition };
+};

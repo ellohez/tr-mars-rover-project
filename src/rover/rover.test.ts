@@ -1,5 +1,11 @@
 import { createPlateau } from "../plateau/plateau";
-import { Rover, createRover, spinRover, Orientation } from "../rover/rover";
+import {
+  Rover,
+  Orientation,
+  createRover,
+  spinRover,
+  moveRover,
+} from "../rover/rover";
 
 describe("createRover function", () => {
   test("should create a rover at the given position", () => {
@@ -76,6 +82,29 @@ describe("spinRover function", () => {
     // Assert
     expect(newRover.orientation).toBe("S");
   });
+});
+describe("moveRover", () => {
+  test("should increase Y position on grid when rover moves North", () => {
+    // Arrange
+    const x = 5;
+    const y = 5;
+    const rover: Rover = {
+      currentPosition: { x: x, y: y },
+      orientation: "E",
+    };
+    const plateau = createPlateau(10, 10);
+    // Act
+    const newRover = moveRover(plateau, rover);
+    // Assert
+    expect(newRover).toEqual({
+      currentPosition: { x: x + 1, y: y },
+      orientation: "E",
+    });
+  });
+  test("should decrease Y position on grid when rover moves South", () => {});
+  test("should increase X position on grid when rover moves East", () => {});
+  test("should decrease X position on grid when rover moves West", () => {});
+  // TODO: Should throw an error if we try to move the rover outside of the plateau
 });
 
 
