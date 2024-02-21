@@ -10,19 +10,19 @@ describe("createPlateau", () => {
   test("should return a dimension with the ", () => {
     // Arrange
     const width = 10;
-    const length = 10;
+    const height = 10;
     // Act
-    const result: Plateau = createPlateau(width, length);
+    const result: Plateau = createPlateau(width, height);
     // Assert
-    expect(result).toEqual({ size: { width: width, length: length } });
+    expect(result).toEqual({ size: { width: width, height: height } });
   });
 
   test("should throw an error if x is 0", () => {
     // Arrange
     const width = 0;
-    const length = 10;
+    const height = 10;
     // Act and Assert
-    expect(() => createPlateau(width, length)).toThrow(
+    expect(() => createPlateau(width, height)).toThrow(
       new RangeError(ZERO_COORD_ERROR)
     );
   });
@@ -30,9 +30,9 @@ describe("createPlateau", () => {
   test("should throw an error if y is 0", () => {
     // Arrange
     const width = 10;
-    const length = 0;
+    const height = 0;
     // Act and Assert
-    expect(() => createPlateau(width, length)).toThrow(
+    expect(() => createPlateau(width, height)).toThrow(
       new RangeError(ZERO_COORD_ERROR)
     );
   });
@@ -40,9 +40,9 @@ describe("createPlateau", () => {
   test("should throw an error if both dimensions are 0", () => {
     // Arrange
     const width = 0;
-    const length = 0;
+    const height = 0;
     // Act and Assert
-    expect(() => createPlateau(width, length)).toThrow(
+    expect(() => createPlateau(width, height)).toThrow(
       new RangeError(ZERO_COORD_ERROR)
     );
   });
