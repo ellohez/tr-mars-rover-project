@@ -13,6 +13,13 @@ export type Rover = {
   orientation: Orientation;
 };
 
+export const isOrientation = (
+  input: string | Orientation
+): input is Orientation => {
+  let testArray = [...COMPASS_POINT_STRINGS.toString()];
+  return testArray.includes(input);
+};
+
 // Pass in Plateau, location information and Orientation
 // return Rover object which stores this data.
 export const createRover = (

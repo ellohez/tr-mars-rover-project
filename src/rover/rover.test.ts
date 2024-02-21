@@ -5,7 +5,43 @@ import {
   createRover,
   spinRover,
   moveRover,
+  isOrientation,
 } from "../rover/rover";
+
+describe("isOrientation type guard", () => {
+  test("should return false if command is not a valid compass point", () => {
+    // Arrange
+    const input: string = "F";
+    // Act
+    const result = isOrientation(input);
+    // Assert
+    expect(result).toEqual(false);
+  });
+  test('should return true if orientation is "S" for South', () => {
+    // Arrange
+    const input: string = "S";
+    // Act
+    const result = isOrientation(input);
+    // Assert
+    expect(result).toEqual(true);
+  });
+  test('should return true if orientation is "N" for North', () => {
+    // Arrange
+    const input: string = "N";
+    // Act
+    const result = isOrientation(input);
+    // Assert
+    expect(result).toEqual(true);
+  });
+  test('should return true if command is "E" for East', () => {
+    // Arrange
+    const input: string = "E";
+    // Act
+    const result = isOrientation(input);
+    // Assert
+    expect(result).toEqual(true);
+  });
+});
 
 describe("createRover function", () => {
   test("should create a rover at the given position", () => {
