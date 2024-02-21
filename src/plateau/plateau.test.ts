@@ -59,5 +59,15 @@ describe("positionOnPlateau", () => {
     // Assert
     expect(resultLocation).toEqual({ x: x, y: y });
   });
-  // TODO: Test if the position is out of bounds.
+  test("should throw an error if the position is out of bounds of the plateau", () => {
+    // Arrange
+    const plateau = createPlateau(100, 100);
+    const x = 50;
+    const y = 50;
+    // Act & Assert
+    const resultLocation: Location = positionOnPlateau(plateau, x, y);
+    // Assert
+    expect(resultLocation).toEqual({ x: x, y: y });
+  });
+  
 });

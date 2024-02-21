@@ -155,7 +155,6 @@ describe("moveRover", () => {
       orientation: "W",
     });
   });
-  // TODO: Should throw an error if we try to move the rover outside of the plateau
   test("should throw an error if we try to move the rover outside of the plateau", () => {
     // Arrange
     const x = 10;
