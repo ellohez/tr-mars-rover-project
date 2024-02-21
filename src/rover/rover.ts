@@ -3,8 +3,7 @@ import { Plateau, Location, positionOnPlateau } from "../plateau/plateau";
 const DIRECTION_STRINGS = ["L", "R"] as const;
 const COMPASS_POINT_STRINGS = ["N", "E", "S", "W"] as const;
 
-type Direction = (typeof DIRECTION_STRINGS)[number];
-type CommandTypes = Direction | "M";
+export type Direction = (typeof DIRECTION_STRINGS)[number];
 
 export type Orientation = (typeof COMPASS_POINT_STRINGS)[number];
 // TODO: Will ned a type guard for CompassPoint/Orientation when UI is added.
