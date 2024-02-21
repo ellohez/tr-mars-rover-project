@@ -13,16 +13,16 @@ export type Location = {
 };
 
 // To DRY out the code and the tests - constants are defined for error messages
-export const ZERO_COORD_ERROR = "Width and length must be greater than zero";
+export const ZERO_COORD_ERROR = "Width and height must be greater than zero";
 export const OUT_OF_BOUNDS =
   "X and Y must be within 0 and the plateau dimensions";
 
-export const createPlateau = (width: number, length: number): Plateau => {
-  if (width <= 0 || length <= 0) {
+export const createPlateau = (width: number, height: number): Plateau => {
+  if (width <= 0 || height <= 0) {
     throw new RangeError(ZERO_COORD_ERROR);
   }
 
-  return { size: { width: width, height: length } };
+  return { size: { width: width, height: height } };
 };
 
 export const positionOnPlateau = (
