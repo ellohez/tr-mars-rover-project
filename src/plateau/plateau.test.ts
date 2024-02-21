@@ -1,4 +1,10 @@
-import { Plateau, Location, createPlateau, positionOnPlateau } from "./plateau";
+import {
+  Plateau,
+  Location,
+  createPlateau,
+  positionOnPlateau,
+  ZERO_COORD_ERROR,
+} from "./plateau";
 
 describe("createPlateau", () => {
   test("should return a dimension with the ", () => {
@@ -17,7 +23,7 @@ describe("createPlateau", () => {
     const length = 10;
     // Act and Assert
     expect(() => createPlateau(width, length)).toThrow(
-      new RangeError("Width and length must be greater than zero")
+      new RangeError(ZERO_COORD_ERROR)
     );
   });
 
@@ -27,7 +33,7 @@ describe("createPlateau", () => {
     const length = 0;
     // Act and Assert
     expect(() => createPlateau(width, length)).toThrow(
-      new RangeError("Width and length must be greater than zero")
+      new RangeError(ZERO_COORD_ERROR)
     );
   });
 
@@ -37,7 +43,7 @@ describe("createPlateau", () => {
     const length = 0;
     // Act and Assert
     expect(() => createPlateau(width, length)).toThrow(
-      new RangeError("Width and length must be greater than zero")
+      new RangeError(ZERO_COORD_ERROR)
     );
   });
 });
@@ -53,4 +59,5 @@ describe("positionOnPlateau", () => {
     // Assert
     expect(resultLocation).toEqual({ x: x, y: y });
   });
+  // TODO: Test if the position is out of bounds.
 });

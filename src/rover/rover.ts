@@ -76,7 +76,6 @@ export const moveRover = (plateau: Plateau, rover: Rover): Rover => {
       break;
   }
 
-  console.log("newPosition :>> ", newPosition);
   try {
     newPosition = positionOnPlateau(plateau, newPosition.x, newPosition.y);
   } catch (error) {

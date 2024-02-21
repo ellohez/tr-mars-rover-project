@@ -1,4 +1,4 @@
-import { createPlateau } from "../plateau/plateau";
+import { createPlateau, OUT_OF_BOUNDS } from "../plateau/plateau";
 import {
   Rover,
   Orientation,
@@ -156,4 +156,16 @@ describe("moveRover", () => {
     });
   });
   // TODO: Should throw an error if we try to move the rover outside of the plateau
+  test("should throw an error if we try to move the rover outside of the plateau", () => {
+    // Arrange
+    const x = 10;
+    const y = 10;
+    const rover: Rover = {
+      currentPosition: { x: x, y: y },
+      orientation: "N",
+    };
+    const plateau = createPlateau(10, 10);
+    // Act & Assert
+    expect(() => moveRover(plateau, rover)).toThrow(RangeError(OUT_OF_BOUNDS));
+  });
 });
