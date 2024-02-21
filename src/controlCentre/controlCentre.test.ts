@@ -14,7 +14,7 @@ describe("isCommand type guard", () => {
     // Act
     const isCommandResult = isCommand(input);
     // Assert
-    expect(isCommandResult).toEqual(false);
+    expect(isCommandResult).toStrictEqual(false);
   });
   test('should return true if command is "M" for Move', () => {
     // Arrange
@@ -22,7 +22,7 @@ describe("isCommand type guard", () => {
     // Act
     const isCommandResult = isCommand(input);
     // Assert
-    expect(isCommandResult).toEqual(true);
+    expect(isCommandResult).toStrictEqual(true);
   });
   test('should return true if command is "L" for Left', () => {
     // Arrange
@@ -30,7 +30,7 @@ describe("isCommand type guard", () => {
     // Act
     const isCommandResult = isCommand(input);
     // Assert
-    expect(isCommandResult).toEqual(true);
+    expect(isCommandResult).toStrictEqual(true);
   });
   test('should return true if command is "R" for Right', () => {
     // Arrange
@@ -38,7 +38,7 @@ describe("isCommand type guard", () => {
     // Act
     const isCommandResult = isCommand(input);
     // Assert
-    expect(isCommandResult).toEqual(true);
+    expect(isCommandResult).toStrictEqual(true);
   });
 });
 describe("processCommand", () => {
@@ -57,7 +57,7 @@ describe("processCommand", () => {
     // Act
     const result = processCommand(input, plateau, roverInput);
     // Assert
-    expect(result).toEqual(roverOutput);
+    expect(result).toStrictEqual(roverOutput);
   });
   test("should update the rover's position when the command is 'M'", () => {
     // Arrange
@@ -74,7 +74,7 @@ describe("processCommand", () => {
     // Act
     const result = processCommand(input, plateau, roverInput);
     // Assert
-    expect(result).toEqual(roverOutput);
+    expect(result).toStrictEqual(roverOutput);
   });
 });
 
@@ -86,7 +86,8 @@ describe("parseInstructions", () => {
     // Act
     const actualOutput = parseInstructions(instructions);
     // Assert
-    expect(actualOutput).toEqual(expectedOutput);
+    // Ensure that the result has the same types and structure as we expect (strict)
+    expect(actualOutput).toStrictEqual(expectedOutput);
   });
   test("should output a position of the SW corner of the plateau as the instructions direct", () => {
     // Arrange
@@ -108,11 +109,12 @@ describe("parseInstructions", () => {
   });
   test("should output a rover position of '1 3 N', '5 1 E' as the instructions direct", () => {
     // Arrange
-    const instructions = ["5 5", "1 2 N", "3 3 E", "LMLMLMLMM", "MMRMMRMRRM"];
+    const instructions = ["5 5", "1 2 N", "LMLMLMLMM", "3 3 E", "MMRMMRMRRM"];
     const expectedOutput = ["1 3 N", "5 1 E"];
     // Act
     const actualOuput = parseInstructions(instructions);
     // Assert
-    expect(actualOuput).toBe(expectedOutput);
+    // Ensure that the result has the same types and structure as we expect (strict)
+    expect(actualOuput).toStrictEqual(expectedOutput);
   });
 });
