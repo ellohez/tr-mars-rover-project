@@ -155,13 +155,25 @@ describe("moveRover", () => {
       orientation: "W",
     });
   });
-  test("should throw an error if we try to move the rover outside of the plateau", () => {
+  test("should throw an error if we try to move the rover off the plateau edge x > height", () => {
     // Arrange
     const x = 10;
     const y = 10;
     const rover: Rover = {
       currentPosition: { x: x, y: y },
       orientation: "N",
+    };
+    const plateau = createPlateau(10, 10);
+    // Act & Assert
+    expect(() => moveRover(plateau, rover)).toThrow(RangeError(OUT_OF_BOUNDS));
+  });
+  test("should throw an error if we try to move the rover outside of the edge of the plateau x < 0", () => {
+    // Arrange
+    const x = 10;
+    const y = 10;
+    const rover: Rover = {
+      currentPosition: { x: 0, y: 0 },
+      orientation: "S",
     };
     const plateau = createPlateau(10, 10);
     // Act & Assert
