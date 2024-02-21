@@ -81,12 +81,12 @@ describe("processCommand", () => {
 describe("parseInstructions", () => {
   test("should ouput a position of NE corner of the plateau as the instructions direct", () => {
     // Arrange
-    const instructions = ["10 10", "5 5 N", "RMRMRMRMRM"];
-    const expectedOutput = "10 10 N";
+    const instructions = ["10 10", "7 7 N", "RMLMRMLMRMLM"];
+    const expectedOutput = ["10 10 N"];
     // Act
-    const actualOuput = parseInstructions(instructions);
+    const actualOutput = parseInstructions(instructions);
     // Assert
-    expect(actualOuput).toBe(expectedOutput);
+    expect(actualOutput).toEqual(expectedOutput);
   });
   test("should output a position of the SW corner of the plateau as the instructions direct", () => {
     // Arrange
