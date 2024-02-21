@@ -7,7 +7,7 @@ import {
 } from "./plateau";
 
 describe("createPlateau", () => {
-  test("should return a dimension with the ", () => {
+  test("should create a regular square shaped plateau and return it", () => {
     // Arrange
     const width = 10;
     const height = 10;
