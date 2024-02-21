@@ -1,4 +1,9 @@
-import { isCommand, processCommand, CommandType } from "./controlCentre";
+import {
+  isCommand,
+  processCommand,
+  CommandType,
+  parseInstructions,
+} from "./controlCentre";
 import { Rover } from "../rover/rover";
 import { createPlateau } from "../plateau/plateau";
 
@@ -73,6 +78,41 @@ describe("processCommand", () => {
   });
 });
 
-describe("parseInput", () => {
-  test("should throw a TypeError if the command is not in the list of valid commands", () => {});
+describe("parseInstructions", () => {
+  test("should ouput a position of NE corner of the plateau as the instructions direct", () => {
+    // Arrange
+    const instructions = ["10 10", "5 5 N", "RMRMRMRMRM"];
+    const expectedOutput = "10 10 N";
+    // Act
+    const actualOuput = parseInstructions(instructions);
+    // Assert
+    expect(actualOuput).toBe(expectedOutput);
+  });
+  test("should output a position of the SW corner of the plateau as the instructions direct", () => {
+    // Arrange
+    // Act
+    // Assert
+  });
+
+  test("should output a position of the centre of the plateau as the instructions direct", () => {
+    // Arrange
+    // Act
+    // Assert
+  });
+
+  test("should throw a TypeError if a command is not in the list of valid commands", () => {
+    // E.g. "LRMZMM" -> all subsequent commands should be ignored
+    // Arrange
+    // Act
+    // Assert
+  });
+  test("should output a rover position of '1 3 N', '5 1 E' as the instructions direct", () => {
+    // Arrange
+    const instructions = ["5 5", "1 2 N", "3 3 E", "LMLMLMLMM", "MMRMMRMRRM"];
+    const expectedOutput = ["1 3 N", "5 1 E"];
+    // Act
+    const actualOuput = parseInstructions(instructions);
+    // Assert
+    expect(actualOuput).toBe(expectedOutput);
+  });
 });
