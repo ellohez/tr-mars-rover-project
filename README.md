@@ -31,7 +31,7 @@ This program implements the rules for a Mars Rover.
 + [ ] Collision detection, to ensure that rovers do not 
 + [ ] Obstacle mapping, placing of obstacles on the plateau, to be avoided with collision detection
 + [ ] Programmable rover - using a file input
-+ [ ] Circular shaped plateau - extend existing functionality to allow two dimension inputs for radius and circumference
++ [ ] Circular shaped plateau - extend existing functionality to allow one dimension input for radius.
 + [ ] Irregular shaped plateau - to better mirror the terrain of the planet
 + [ ] Battery tracker - Give an indication of the current battery level of the rover and use a formula to estimate the reduction in battery life for each command executed.
 
@@ -45,7 +45,8 @@ This program implements the rules for a Mars Rover.
 
 Install dependencies: `npm install`
 
-Run tests: `npm test` this automatically runs all tests and creates the coverage report.
+Run tests: 
+`npm test` this automatically runs all tests, creates the coverage report and watches for changes.
 
 To view the coverage report - open `coverage\lcov-report\index.html` in a browser
 
