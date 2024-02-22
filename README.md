@@ -16,7 +16,7 @@ This program implements the rules for a Mars Rover.
 * To ensure a stable application before user input is introduced, this project is currently receiving input via the unit tests.
 * TDD was used to test-drive the solution as it was built.
 * The project aimed to produce production quality, readable and scalable code. 
-* The unit test were created using Jest and the project maintains > 80% coverage 
+* The unit test were created using Jest and the project maintains > 80% coverage as per industry standard. Coverage is currently > 90%.
 * The non-mutating functional approach that returns new instances of the objects is deemed to be a very JS way. Is simpler to test and will hopefully make the introduction of async functionality simpler.
 
 ## Next sprint
@@ -28,10 +28,10 @@ This program implements the rules for a Mars Rover.
 + [ ] Use Async promises for all Rover communication and output- to allow for delay in Earth to Mars communication (and vice versa)
 + [ ] User interface - at least CLI to help shape how this will look
 + [ ] Other vehicldes, not just rovers
-+ [ ] Collision detection, to ensure that rovers do not 
++ [ ] Collision detection, to ensure that rovers do not crash. Need to detect when a rover would be moved to an already occupied grid square.
 + [ ] Obstacle mapping, placing of obstacles on the plateau, to be avoided with collision detection
 + [ ] Programmable rover - using a file input
-+ [ ] Circular shaped plateau - extend existing functionality to allow one dimension input for radius.
++ [ ] Circular shaped plateau - extend existing functionality to allow one dimension input for radius. Gridding of this would need careful consideration.
 + [ ] Irregular shaped plateau - to better mirror the terrain of the planet
 + [ ] Battery tracker - Give an indication of the current battery level of the rover and use a formula to estimate the reduction in battery life for each command executed.
 
