@@ -1,5 +1,6 @@
-import { Plateau, Location, createPlateau, positionOnPlateau } from "./plateau";
+import { Plateau, createPlateau, positionOnPlateau } from "./plateau";
 import { ZERO_COORD_ERROR } from "../errorStrings";
+import { isErr } from "../errorHandling";
 
 describe("createPlateau", () => {
   test("should create a regular square shaped plateau and return it", () => {
@@ -60,7 +61,7 @@ describe("positionOnPlateau", () => {
     const x = 50;
     const y = 50;
     // Act
-    const resultLocation: Location = positionOnPlateau(plateau, x, y);
+    const resultLocation = positionOnPlateau(plateau, x, y);
     // Assert
     expect(resultLocation).toEqual({ x: x, y: y });
   });
@@ -70,19 +71,18 @@ describe("positionOnPlateau", () => {
     const x = 150;
     const y = 50;
     // Act
-    const resultLocation: Location = positionOnPlateau(plateau, x, y);
+    const resultLocation = positionOnPlateau(plateau, x, y);
     // Assert
     expect(resultLocation).toEqual({ x: x, y: y });
   });
   test("should throw an error if the position is out of bounds of the plateau", () => {
     // Arrange
     const plateau = createPlateau(100, 100);
-    const x = 50;
+    const x = 101;
     const y = 50;
     // Act & Assert
-    const resultLocation: Location = positionOnPlateau(plateau, x, y);
+    const resultLocation = positionOnPlateau(plateau, x, y);
     // Assert
-    expect(resultLocation).toEqual({ x: x, y: y });
+    expect(isErr(resultLocation)).toEqual(true);
   });
-  
 });

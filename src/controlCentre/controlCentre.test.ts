@@ -6,13 +6,13 @@ import {
 } from "./controlCentre";
 import { Rover } from "../rover/rover";
 import { createPlateau } from "../plateau/plateau";
+import { isErr, Err } from "../errorHandling";
 
 import {
   OUT_OF_BOUNDS,
   NO_SETUP_ERROR,
   INVALID_ROVER_COMMAND,
 } from "../errorStrings";
-
 
 describe("isCommand type guard", () => {
   test('should return false if command is not either "L, "R" or "M"', () => {
@@ -83,7 +83,7 @@ describe("processCommand", () => {
     // Assert
     expect(result).toStrictEqual(roverOutput);
   });
-  test("should throw an error if the next position would be out of the plateau bounds", () => {
+  test("should return an error if the next position would be out of the plateau bounds", () => {
     // Arrange
     const input: CommandType = "M";
     const plateau = createPlateau(5, 5);
@@ -92,9 +92,11 @@ describe("processCommand", () => {
       orientation: "E",
     };
     // Act and Assert
-    expect(() => processCommand(input, plateau, roverInput)).toThrow(
-      RangeError(OUT_OF_BOUNDS)
-    );
+    const result = processCommand(input, plateau, roverInput);
+    expect(isErr(result)).toEqual(true);
+    if (isErr(result)) {
+      expect(result.error).toEqual(OUT_OF_BOUNDS);
+    }
   });
 });
 

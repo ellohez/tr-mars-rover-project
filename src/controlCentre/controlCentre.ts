@@ -8,8 +8,9 @@ import {
 } from "../rover/rover";
 
 import { INVALID_ROVER_COMMAND, NO_SETUP_ERROR } from "../errorStrings";
-
 import { Plateau, createPlateau } from "../plateau/plateau";
+import { isErr, Err, CreateErr } from "../errorHandling";
+
 export type CommandType = Direction | "M";
 type CommandValues = CommandType[];
 
@@ -28,21 +29,17 @@ export const processCommand = (
   command: CommandType,
   plateau: Plateau,
   rover: Rover
-): Rover => {
+): Err | Rover => {
   switch (command) {
     case "M":
-      try {
-        return moveRover(plateau, rover);
-      } catch (error) {
-        throw error;
-      }
+      return moveRover(plateau, rover);
     case "L":
     case "R":
       return spinRover(rover, command);
   }
 };
 
-export const parseInstructions = (input: string[]): string[] => {
+export const parseInstructions = (input: string[]): Err | string[] => {
   const outputArray: Array<string> = [];
   let plateauExists = false;
   let roverExists = false;
@@ -55,7 +52,12 @@ export const parseInstructions = (input: string[]): string[] => {
         let x = parseInt(inputArray[0]);
         let y = parseInt(inputArray[1]);
         if (isOrientation(inputArray[2])) {
-          rover = createRover(plateau, x, y, inputArray[2]);
+          const result = createRover(plateau, x, y, inputArray[2]);
+          if (!isErr(result)) {
+            rover = result as typeof rover;
+          } else {
+            return result;
+          }
           roverExists = true;
         }
       } else if (inputArray.length === 2) {
@@ -70,7 +72,7 @@ export const parseInstructions = (input: string[]): string[] => {
         for (let command of commandArray) {
           if (isCommand(command)) {
             let result = processCommand(command, plateau, rover);
-            if (result) {
+            if (!isErr(result)) {
               rover = result;
             }
           } else {

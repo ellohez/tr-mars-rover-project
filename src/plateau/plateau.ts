@@ -1,4 +1,5 @@
 import { ZERO_COORD_ERROR, OUT_OF_BOUNDS } from "../errorStrings";
+import { CreateErr, Err } from "../errorHandling";
 
 export type Dimensions = {
   width: number;
@@ -26,9 +27,9 @@ export const positionOnPlateau = (
   plateau: Plateau,
   x: number,
   y: number
-): Location => {
+): Err | Location => {
   if (x < 0 || y < 0 || x > plateau.size.width || y > plateau.size.height) {
-    throw new RangeError(OUT_OF_BOUNDS);
+    return CreateErr(OUT_OF_BOUNDS, "Plateau") as Err;
   }
 
   return { x: x, y: y };

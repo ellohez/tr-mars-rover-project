@@ -9,6 +9,7 @@ import {
   moveRover,
   isOrientation,
 } from "../rover/rover";
+import { isErr } from "../errorHandling";
 
 describe("isOrientation type guard", () => {
   test("should return false if command is not a valid compass point", () => {
@@ -63,7 +64,7 @@ describe("createRover function", () => {
     });
   });
 
-  test("should throw an error when we try and place a rover outside the plateau", () => {
+  test("should return an error when we try and place a rover outside the plateau", () => {
     const width = 10;
     const length = 10;
     const x = 50;
@@ -71,7 +72,12 @@ describe("createRover function", () => {
     const plateau = createPlateau(width, length);
     const direction = "N";
     // Act & Assert
-    expect(() => createRover(plateau, x, y, direction)).toThrow(RangeError);
+    const result = createRover(plateau, x, y, direction);
+    expect(isErr(result)).toEqual(true);
+    if (isErr(result)) {
+      expect(result.error).toEqual(OUT_OF_BOUNDS);
+    }
+    expect(isErr(result)).toEqual(true);
   });
 });
 
@@ -193,7 +199,7 @@ describe("moveRover", () => {
       orientation: "W",
     });
   });
-  test("should throw an error if we try to move the rover off the plateau edge x > height", () => {
+  test("should return an error if we try to move the rover off the plateau edge x > height", () => {
     // Arrange
     const x = 10;
     const y = 10;
@@ -203,9 +209,13 @@ describe("moveRover", () => {
     };
     const plateau = createPlateau(10, 10);
     // Act & Assert
-    expect(() => moveRover(plateau, rover)).toThrow(RangeError(OUT_OF_BOUNDS));
+    const result = moveRover(plateau, rover);
+    if (isErr(result)) {
+      expect(result.error).toEqual(OUT_OF_BOUNDS);
+    }
+    expect(isErr(result)).toEqual(true);
   });
-  test("should throw an error if we try to move the rover outside of the edge of the plateau x < 0", () => {
+  test("should return an error if we try to move the rover outside of the edge of the plateau x < 0", () => {
     // Arrange
     const x = 10;
     const y = 10;
@@ -215,6 +225,10 @@ describe("moveRover", () => {
     };
     const plateau = createPlateau(10, 10);
     // Act & Assert
-    expect(() => moveRover(plateau, rover)).toThrow(RangeError(OUT_OF_BOUNDS));
+    const result = moveRover(plateau, rover);
+    if (isErr(result)) {
+      expect(result.error).toEqual(OUT_OF_BOUNDS);
+    }
+    expect(isErr(result)).toEqual(true);
   });
 });

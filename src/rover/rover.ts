@@ -1,4 +1,5 @@
 import { Plateau, Location, positionOnPlateau } from "../plateau/plateau";
+import { Err, isErr } from "../errorHandling";
 
 const DIRECTION_STRINGS = ["L", "R"] as const;
 const COMPASS_POINT_STRINGS = ["N", "E", "S", "W"] as const;
@@ -27,12 +28,11 @@ export const createRover = (
   x: number,
   y: number,
   direction: Orientation
-): Rover => {
-  let position = null;
-  try {
-    position = positionOnPlateau(plateau, x, y);
-  } catch (error) {
-    throw error;
+): Err | Rover => {
+  // let position = null;
+  const position = positionOnPlateau(plateau, x, y);
+  if (isErr(position)) {
+    return position as Err;
   }
   return { currentPosition: position, orientation: direction };
 };
@@ -65,8 +65,11 @@ export const spinRover = (rover: Rover, direction: Direction): Rover => {
   };
 };
 
-export const moveRover = (plateau: Plateau, rover: Rover): Rover => {
-  let newPosition = { x: rover.currentPosition.x, y: rover.currentPosition.y };
+export const moveRover = (plateau: Plateau, rover: Rover): Err | Rover => {
+  const newPosition = {
+    x: rover.currentPosition.x,
+    y: rover.currentPosition.y,
+  };
 
   switch (rover.orientation) {
     case "N":
@@ -83,10 +86,9 @@ export const moveRover = (plateau: Plateau, rover: Rover): Rover => {
       break;
   }
 
-  try {
-    newPosition = positionOnPlateau(plateau, newPosition.x, newPosition.y);
-  } catch (error) {
-    throw error;
+  const result = positionOnPlateau(plateau, newPosition.x, newPosition.y);
+  if (isErr(result)) {
+    return result;
   }
   return { ...rover, currentPosition: newPosition };
 };
