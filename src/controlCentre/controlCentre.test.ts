@@ -3,11 +3,16 @@ import {
   processCommand,
   CommandType,
   parseInstructions,
-  NO_SETUP_ERROR,
-  INVALID_ROVER_COMMAND,
 } from "./controlCentre";
 import { Rover } from "../rover/rover";
-import { OUT_OF_BOUNDS, createPlateau } from "../plateau/plateau";
+import { createPlateau } from "../plateau/plateau";
+
+import {
+  OUT_OF_BOUNDS,
+  NO_SETUP_ERROR,
+  INVALID_ROVER_COMMAND,
+} from "../errorStrings";
+
 
 describe("isCommand type guard", () => {
   test('should return false if command is not either "L, "R" or "M"', () => {

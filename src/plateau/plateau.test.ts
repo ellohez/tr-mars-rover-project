@@ -1,10 +1,5 @@
-import {
-  Plateau,
-  Location,
-  createPlateau,
-  positionOnPlateau,
-  ZERO_COORD_ERROR,
-} from "./plateau";
+import { Plateau, Location, createPlateau, positionOnPlateau } from "./plateau";
+import { ZERO_COORD_ERROR } from "../errorStrings";
 
 describe("createPlateau", () => {
   test("should create a regular square shaped plateau and return it", () => {

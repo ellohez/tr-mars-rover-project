@@ -6,13 +6,12 @@ import {
   spinRover,
   isOrientation,
 } from "../rover/rover";
+
+import { INVALID_ROVER_COMMAND, NO_SETUP_ERROR } from "../errorStrings";
+
 import { Plateau, createPlateau } from "../plateau/plateau";
 export type CommandType = Direction | "M";
 type CommandValues = CommandType[];
-
-export const NO_SETUP_ERROR =
-  "A plateau and rover must be set up before issuing commands";
-export const INVALID_ROVER_COMMAND = "Invalid rover command";
 
 const CommandsArray: CommandValues = ["L", "R", "M"];
 let rover: Rover;

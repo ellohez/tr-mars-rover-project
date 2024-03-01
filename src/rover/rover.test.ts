@@ -1,4 +1,6 @@
-import { createPlateau, OUT_OF_BOUNDS } from "../plateau/plateau";
+import { createPlateau } from "../plateau/plateau";
+import { OUT_OF_BOUNDS } from "../errorStrings";
+
 import {
   Rover,
   Orientation,
